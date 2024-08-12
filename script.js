@@ -40,20 +40,26 @@ function gerarBotoes() {
     var row2 = document.querySelector(".row2");
     row1.innerHTML = "";
     row2.innerHTML = "";
-    row1.innerHTML += `<div onclick="selecionar(id)" id=${alternativas[0]} class="btn-alternativa">${alternativas[0]}</div>`;
-    row1.innerHTML += `<div onclick="selecionar(id)" id=${alternativas[1]} class="btn-alternativa">${alternativas[1]}</div>`;
-    row2.innerHTML += `<div onclick="selecionar(id)" id=${alternativas[2]} class="btn-alternativa">${alternativas[2]}</div>`;
-    row2.innerHTML += `<div onclick="selecionar(id)" id=${alternativas[3]} class="btn-alternativa">${alternativas[3]}</div>`;
+    row1.innerHTML += `<div onclick="selecionar(event)" id="${gerarId(alternativas[0])}" class="btn-alternativa">${alternativas[0]}</div>`;
+    row1.innerHTML += `<div onclick="selecionar(event)" id="${gerarId(alternativas[1])}" class="btn-alternativa">${alternativas[1]}</div>`;
+    row2.innerHTML += `<div onclick="selecionar(event)" id="${gerarId(alternativas[2])}" class="btn-alternativa">${alternativas[2]}</div>`;
+    row2.innerHTML += `<div onclick="selecionar(event)" id="${gerarId(alternativas[3])}" class="btn-alternativa">${alternativas[3]}</div>`;
 }
 
-function selecionar(opcao) {
+function gerarId(alternativa) {
+    return (alternativa == palavraSorteada["traducao"]) ? "certa" : "errada";
+}
+
+function selecionar(event) {
     if (jogoRodando) {
-        var opcaoErrada = document.getElementById(opcao);
-        var opcaoCerta = document.getElementById(palavraSorteada["traducao"]);
+        var opcaoErrada = event.target;
+        var opcaoCerta = document.getElementById("certa");
         opcaoErrada.style.backgroundColor = "#ff002b";
         opcaoCerta.style.backgroundColor = "#38b000";
         jogoRodando = false;
     }
+
+    console.log(event.target.outerText)
 }
 
 function limpar() {
